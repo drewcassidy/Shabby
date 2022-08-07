@@ -42,6 +42,8 @@ jobs:
 
       - name: Validate Version Info
         uses: DasSkelett/AVC-VersionFileValidator@master
+        with: 
+          only: '["./Assets/Shabby.version"]'
 
       - name: Build DLL
         working-directory: Source
