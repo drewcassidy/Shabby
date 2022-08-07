@@ -6,7 +6,6 @@
     <IsPackable>false</IsPackable>
     <PlatformTarget>x64</PlatformTarget>
     <NoWarn>1701;1702;CS0649;CS1591</NoWarn>
-    <AssemblyVersion>9.9.9</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,8 +42,10 @@
     <None Include="..\.editorconfig"/>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="/bin/cp -v '$(OutDir)Shabby.dll' '$(SolutionDir)../GameData/Shabby/Plugins/Shabby.dll'" IgnoreExitCode="true"/>
-    <!--Fuck you MSBuild stop trying to run CMD.exe on macOS-->
+    <Exec Command="/bin/mkdir -p '$(SolutionDir)/GameData/Shabby/Plugins'" IgnoreExitCode="true"/>
+    <Exec Command="/bin/cp -v '$(OutDir)Shabby.dll' '$(SolutionDir)/GameData/Shabby/Plugins/'" IgnoreExitCode="true"/>
+    <Exec Command="/bin/cp -v '$(SolutionDir)/License.txt' '$(SolutionDir)/GameData/Shabby/'" IgnoreExitCode="true"/>
+    <Exec Command="/bin/cp -v '$(SolutionDir)/Assets/Shabby.version' '$(SolutionDir)/GameData/Shabby/'" IgnoreExitCode="true"/>
   </Target>
 
 </Project>
