@@ -28,12 +28,11 @@ jobs:
           python -m pip install -r tools/requirements.txt
 
       - name: Download Dependencies
-        working-directory: Source
         run: |
           mkdir -p Source/dlls
           mkdir -p GameData
           wget --user drewcassidy --password ${{ secrets.PILE_OF_ROCKS_PASS }} https://pileof.rocks/Secret/KSP-1.12.3-dlls.zip
-          unzip KSP-*-dlls.zip -d Source/dlls
+          unzip KSP-*-dlls.zip -d Source/
           wget https://github.com/KSPModdingLibs/HarmonyKSP/releases/download/2.2.1.0/HarmonyKSP_2.2.1.0_for_KSP1.8+.zip
           unzip HarmonyKSP*.zip
           cp GameData/000_Harmony/0Harmony.dll Source/dlls/
@@ -48,7 +47,6 @@ jobs:
           only: '["./Assets/Shabby.version"]'
 
       - name: Build DLL
-        working-directory: Source
         run: |
           tree -L 4
           dotnet build -v d --configuration Release $PWD/Shabby.sln
