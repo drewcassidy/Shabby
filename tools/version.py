@@ -14,13 +14,13 @@ def run():
     g = gp.Git(basedir)
 
     release = True
-    version, distance, sha = g.execute(["git", "describe"]).split("-")
+    tag, distance, sha = g.execute(["git", "describe"]).split("-")
 
     if int(distance) > 0:
         release = False
-        version = yaclog.version.increment_version(version, 2)
+        tag = yaclog.version.increment_version(tag, 2)
 
-    segments = version.split('.')
+    segments = tag.split('.')
     ver_major, ver_minor, ver_patch = segments[0:3]
     if len(segments) >= 4:
         ver_build = segments[3]
@@ -44,7 +44,8 @@ def run():
                 ver_major=ver_major,
                 ver_minor=ver_minor,
                 ver_patch=ver_patch,
-                ver_build=ver_build
+                ver_build=ver_build,
+                tag=tag
             ))
 
     print('Done!')

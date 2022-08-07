@@ -1,7 +1,7 @@
 {
     "NAME":"Shabby",
     "URL":"https://pileof.rocks/KSP/Shabby.version",
-    "DOWNLOAD":"https://pileof.rocks/KSP/Shabby_v{{ ver_major }}.{{ ver_minor }}.{{ ver_patch }}.zip",
+    "DOWNLOAD":"https://pileof.rocks/KSP/Shabby-{{ tag }}.zip",
     "VERSION": {
         "MAJOR": {{ ver_major }},
         "MINOR": {{ ver_minor }},
