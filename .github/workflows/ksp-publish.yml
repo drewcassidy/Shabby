@@ -48,7 +48,8 @@ jobs:
       - name: Build DLL
         working-directory: Source
         run: |
-          dotnet build --configuration Release ./Source/Shabby.csproj 
+          ls
+          dotnet build -v d --configuration Release ./Source/Shabby.csproj 
 
       - name: Upload Unbundled Build
         uses: actions/upload-artifact@v3
