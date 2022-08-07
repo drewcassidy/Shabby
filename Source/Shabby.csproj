@@ -22,7 +22,7 @@
       <HintPath>dlls/UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>dlls\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>dlls/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -39,12 +39,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig"/>
+    <None Include="../.editorconfig"/>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="/bin/mkdir -p '$(SolutionDir)/GameData/Shabby/Plugins'" IgnoreExitCode="true"/>
     <Exec Command="/bin/cp -v '$(OutDir)Shabby.dll' '$(SolutionDir)/GameData/Shabby/Plugins/'" IgnoreExitCode="true"/>
-    <Exec Command="/bin/cp -v '$(SolutionDir)/License.txt' '$(SolutionDir)/GameData/Shabby/'" IgnoreExitCode="true"/>
     <Exec Command="/bin/cp -v '$(SolutionDir)/Assets/Shabby.version' '$(SolutionDir)/GameData/Shabby/'" IgnoreExitCode="true"/>
   </Target>
 
