@@ -22,8 +22,6 @@ jobs:
 
       - name: Install Python Tools
         run: |
-          sudo apt install tree
-          tree -L 4
           python -m pip install --upgrade pip
           python -m pip install -r tools/requirements.txt
 
@@ -48,8 +46,7 @@ jobs:
 
       - name: Build DLL
         run: |
-          tree -L 4
-          dotnet build -v d --configuration Release $PWD/Shabby.sln
+          dotnet build --configuration Release Shabby.sln
 
       - name: Upload Unbundled Build
         uses: actions/upload-artifact@v3
