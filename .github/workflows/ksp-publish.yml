@@ -49,7 +49,7 @@ jobs:
         working-directory: Source
         run: |
           ls
-          dotnet build -v d --configuration Release ./Source/Shabby.csproj 
+          dotnet build -v d --configuration Release $PWD/Shabby.sln
 
       - name: Upload Unbundled Build
         uses: actions/upload-artifact@v3
