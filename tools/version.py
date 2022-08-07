@@ -11,32 +11,31 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 def run():
     basedir = Path(__file__).parent.parent
 
-    repo = gp.Repo(basedir)
-    cl = yaclog.Changelog('CHANGELOG.md')
-    version = str(cl.current_version(released=True).version)
-    release = False
-    build = 0
+    g = gp.Git(basedir)
 
-    for tag in repo.tags:
-        #todo: this should really be part of Yaclog's API
-        if tag.commit == repo.head.commit:
-            release = True
-            build = 0
-            break
+    release = True
+    version, distance, sha = g.execute(["git", "describe"]).split("-")
 
-    if not release:
-        build = int.from_bytes(repo.head.commit.binsha[0:2], byteorder='big')
+    if int(distance) > 0:
+        release = False
         version = yaclog.version.increment_version(version, 2)
 
-    print(f'Configuring version {version} build {build}')
+    segments = version.split('.')
+    ver_major, ver_minor, ver_patch = segments[0:3]
+    if len(segments) >= 4:
+        ver_build = segments[3]
+    elif release:
+        ver_build = int(distance)
+    else:
+        ver_build = int("0x" + sha[1:5], 16)
 
-    ver_major, ver_minor, ver_patch = tuple(version.split('.'))
+    print(f'Configuring version {ver_major}.{ver_minor}.{ver_patch} build {ver_build}')
 
     env = Environment(
         loader=FileSystemLoader(basedir / "Templates"),
         autoescape=select_autoescape()
     )
-    
+
     for template_name in ["Assets/Shabby.version", "Source/assembly/AssemblyInfo.cs"]:
         print("Generating " + template_name)
         template = env.get_template(template_name)
@@ -45,11 +44,11 @@ def run():
                 ver_major=ver_major,
                 ver_minor=ver_minor,
                 ver_patch=ver_patch,
-                ver_build=build
+                ver_build=ver_build
             ))
 
-
     print('Done!')
+
 
 if __name__ == '__main__':
     run()
