@@ -26,7 +26,7 @@ jobs:
       - name: Download Dependencies
         working-directory: Source
         run: |
-          wget --user drewcassidy --password ${{ secrets.PILE_OF_ROCKS_PASS }} https://pileof.rocks/Secret/ksp-1.12.3-dlls.zip
+          wget --user drewcassidy --password ${{ secrets.PILE_OF_ROCKS_PASS }} https://pileof.rocks/Secret/KSP-1.12.3-dlls.zip
           unzip ksp-*-dlls.zip -d Source/dlls
           wget https://github.com/KSPModdingLibs/HarmonyKSP/releases/download/2.2.1.0/HarmonyKSP_2.2.1.0_for_KSP1.8+.zip
           unzip HarmonyKSP*.zip -d GameData
